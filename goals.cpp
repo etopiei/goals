@@ -35,9 +35,9 @@ void writeOutGoals() {
 	myFile.open((home + "/scripts/goals.txt").c_str());
 
 	for(int i = 0; i < goalNames.size(); i++) {
-		myFile << goalNames[i];
-		myFile << goalNumbers[2*i];
-		myFile << goalNumbers[2*i+1];
+		myFile << goalNames[i] << std::endl;
+		myFile << goalNumbers[2*i] << std::endl;
+		myFile << goalNumbers[2*i+1] << std::endl;
 	}
 	myFile.close();
 }
@@ -61,6 +61,7 @@ std::string selectGoal() {
 		output += std::to_string(i+1);	
 		output += ". ";
 		output += goalNames[i];
+		output += "\n";
 	}
 	return output;
 }
@@ -82,6 +83,11 @@ std::string printGoals() {
 		output += "> ";
 	    output += std::to_string(std::trunc(100*percent)/100);
 		output += "%";
+		output += " (";
+		output += std::to_string(current);
+		output += "/";
+		output += std::to_string(max);
+		output += ")";
 		output += "\n\n";
 	}
 	return output;
@@ -90,12 +96,12 @@ std::string printGoals() {
 void addToGoal(bool adding) {
 		int choice = 0;
 		int change = 0;
-		if(adding) {
-			std::cout << "Select a goal from below to add to: " << std::endl;
-		} else {
-			std::cout << "Select a goal from below to subtract from: " << std::endl;
-		}
 		std::cout << selectGoal();
+		if(adding) {
+			std::cout << "Select a goal from above to add to: " << std::endl;
+		} else {
+			std::cout << "Select a goal from above to subtract from: " << std::endl;
+		}
 		std::cin >> choice;
 		if(adding) {
 			std::cout << "How much would you to add to this goal?";
@@ -108,8 +114,8 @@ void addToGoal(bool adding) {
 
 void deleteGoal() {
 	int choice = 0;
-	std::cout << "Select a goal to delete: " << std::endl;
 	std::cout << selectGoal();
+	std::cout << "Select a goal to delete: " << std::endl;
 	std::cin >> choice;
 	goalNames.erase(goalNames.begin() + choice - 1);
 }
@@ -117,9 +123,8 @@ void deleteGoal() {
 void newGoal() {
 	std::string goalName;
 	std::cout << "Enter the name of your new goal: ";
-	while(getline(std::cin, goalName)) {
-		goalNames.push_back(goalName);
-	}
+	std::getline(std::cin, goalName);
+	goalNames.push_back(goalName);
 	int max = 0;
 	int current = 0;
 	std::cout << "What integer are you aiming for: ";
@@ -141,7 +146,7 @@ int main(int argc, char **argv) {
 		if(option == "show") {
 				std::cout << printGoals();
 		} else if(option == "add") {
-			addToGoal(true);
+				addToGoal(true);
 		} else if(option == "sub") {
 				addToGoal(false);
 		} else if(option == "delete") {
