@@ -44,7 +44,7 @@ void writeOutGoals() {
 
 std::string showUsage() {
 	std::string usage = "Usage:\n";
-	usage += "goals [option]";
+	usage += "goals [option]\n";
 	usage += "\nOptions:\n";
 	usage += "show - Shows all goals and their progress\n";
 	usage += "add - Add toward goal\n";
@@ -63,11 +63,12 @@ std::string selectGoal() {
 		output += goalNames[i];
 		output += "\n";
 	}
+	output += "\n";
 	return output;
 }
 
 std::string printGoals() {
-	std::string output = "Goals:\n\n";
+	std::string output = "\n";
 	for(int i = 0; i < goalNames.size(); i++) {
 		output += goalNames[i] + ": ";
 		int max = goalNumbers[2*i];
@@ -88,8 +89,9 @@ std::string printGoals() {
 		output += "/";
 		output += std::to_string(max);
 		output += ")";
-		output += "\n\n";
+		output += "\n";
 	}
+	output += "\n";
 	return output;
 }
 
@@ -115,7 +117,7 @@ void addToGoal(bool adding) {
 void deleteGoal() {
 	int choice = 0;
 	std::cout << selectGoal();
-	std::cout << "Select a goal to delete: " << std::endl;
+	std::cout << "Select a goal to delete: ";
 	std::cin >> choice;
 	goalNames.erase(goalNames.begin() + choice - 1);
 }
@@ -141,7 +143,6 @@ int main(int argc, char **argv) {
 				std::cout << showUsage();
 				return 0;
 		} 
-
 		std::string option(argv[1]);
 		readInGoals();
 
