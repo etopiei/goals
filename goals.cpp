@@ -98,15 +98,15 @@ void addToGoal(bool adding) {
 		int change = 0;
 		std::cout << selectGoal();
 		if(adding) {
-			std::cout << "Select a goal from above to add to: " << std::endl;
+			std::cout << "Select a goal from above to add to: ";
 		} else {
-			std::cout << "Select a goal from above to subtract from: " << std::endl;
+			std::cout << "Select a goal from above to subtract from: ";
 		}
 		std::cin >> choice;
 		if(adding) {
-			std::cout << "How much would you to add to this goal?";
+			std::cout << "How much would you to add to this goal: ";
 		} else {
-			std::cout << "How much would you like to subtract from this goal?";
+			std::cout << "How much would you like to subtract from this goal: ";
 		}
 		std::cin >> change;
 		goalNumbers[2*(choice-1)+1] += change; //TODO: Check if this completes goal	or goes below 0
@@ -129,6 +129,8 @@ void newGoal() {
 	int current = 0;
 	std::cout << "What integer are you aiming for: ";
 	std::cin >> max;
+	std::cout << "What are you up to now: ";
+	std::cin >> current;
 	goalNumbers.push_back(max);
 	goalNumbers.push_back(current);
 }
