@@ -5,6 +5,8 @@
 #include <sstream>
 #include <cmath>
 
+#include "ProgressBar.h"
+
 std::vector<int> goalNumbers;
 std::vector<std::string> goalNames;
 
@@ -73,22 +75,7 @@ std::string printGoals() {
 		output += goalNames[i] + ": ";
 		int max = goalNumbers[2*i];
 		int current = goalNumbers[2*i+1];
-		float percent = (float)current/max*100;
-		output += "<";
-		for(float j = 0; j < percent/3; j++) {
-			output += "#";
-		}
-		for(float j = 0; j < 33-(percent/3); j++) {
-			output += " ";
-		}	
-		output += "> ";
-	    output += std::to_string(std::trunc(100*percent)/100);
-		output += "%";
-		output += " (";
-		output += std::to_string(current);
-		output += "/";
-		output += std::to_string(max);
-		output += ")";
+                output += ProgressBar(current,max,33).toString();
 		output += "\n";
 	}
 	output += "\n";
