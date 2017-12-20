@@ -1,7 +1,7 @@
 all: goals
 
 goals: 
-	g++ -o goals goals.cpp
+	g++ -o goals goals.cpp -std=c++11
 
 clean:
 	rm ~/scripts/goals
